@@ -61,7 +61,7 @@ function toggleMute() {
 function toggleDeafen() {
     if (MediaEngineStore.isEnabled()) {
         Dispatcher.dispatch({
-            type: "AUDIO_TOGGLE_SELF_DEAFEN",
+            type: "AUDIO_TOGGLE_SELF_DEAF",
             syncRemote: true,
             playSoundEffect: true,
             context: "default"
