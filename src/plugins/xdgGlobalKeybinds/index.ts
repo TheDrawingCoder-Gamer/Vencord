@@ -6,6 +6,7 @@
 
 import { IpcEvents } from "@shared/IpcEvents";
 import { Devs } from "@utils/constants";
+import { FluxDispatcher as Dispatcher, MediaEngineStore } from "@webpack/common";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
@@ -47,15 +48,23 @@ export default definePlugin({
 // TODO: instead of triggering clicks, find the actual functions to call
 // This would enable more actions in the future, like toggling push-to-talk
 function toggleMute() {
-    const muteButton = document.querySelector(
-        'button[aria-label="Mute"][role="switch"]',
-    ) as HTMLButtonElement | null;
-    muteButton?.click();
+    if (MediaEngineStore.isEnabled()) {
+        Dispatcher.dispatch({
+            type: "AUDIO_TOGGLE_SELF_MUTE",
+            syncRemote: true,
+            playSoundEffect: true,
+            context: "default",
+        })
+    }
 }
 
 function toggleDeafen() {
-    const deafenButton = document.querySelector(
-        'button[aria-label="Deafen"][role="switch"]',
-    ) as HTMLButtonElement | null;
-    deafenButton?.click();
+    if (MediaEngineStore.isEnabled()) {
+        Dispatcher.dispatch({
+            type: "AUDIO_TOGGLE_SELF_DEAFEN",
+            syncRemote: true,
+            playSoundEffect: true,
+            context: "default"
+        })
+    }
 }
