@@ -45,8 +45,6 @@ export default definePlugin({
     },
 });
 
-// TODO: instead of triggering clicks, find the actual functions to call
-// This would enable more actions in the future, like toggling push-to-talk
 function toggleMute() {
     if (MediaEngineStore.isEnabled()) {
         Dispatcher.dispatch({
